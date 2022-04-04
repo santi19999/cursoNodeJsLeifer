@@ -58,6 +58,7 @@ const updateItems = async (req, res) => {
     try {
         const {id, ...body}= matchedData(req);
         const data=await tracksModel.findOneAndUpdate(id,body);
+        res.send({ data })
     } catch (error) {
         handleHttpError(res, "ERROR_UPDATE_ITEMS")
     }
@@ -68,7 +69,17 @@ const updateItems = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItems = async (req, res) => { }
+const deleteItems = async (req, res) => {
+    try {
+        req = matchedData(req)
+        const { id } = req
+        console.log(id)
+        const data = await tracksModel.deleteOne({_id:id})
+        res.send({ data })
+    } catch (error) {
+        handleHttpError(res, "ERROR_DELETE_ITEMS")
+    }
+ }
 
 
 module.exports = { getItems, getItem, createItems, updateItems, deleteItems }

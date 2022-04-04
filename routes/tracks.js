@@ -1,5 +1,5 @@
 const express = require("express");
-const { getItems, createItems, getItem, updateItems } = require("../controllers/traks");
+const { getItems, createItems, getItem, updateItems, deleteItems } = require("../controllers/traks");
 const { validatorCreateItem, validatorGetItem } = require("../validators/tracks");
 const router = express.Router();
 
@@ -25,5 +25,12 @@ router.post("/",validatorCreateItem,createItems)
  */
 router.put("/:id",validatorGetItem,validatorCreateItem,updateItems)
 
+
+
+/**
+ * Eliminar un Registro
+ */
+
+router.delete("/:id",validatorGetItem,deleteItems)
 
 module.exports= router
